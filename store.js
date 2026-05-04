@@ -1,31 +1,4 @@
-
-
-import { create } from 'zustand';
-import { db } from './firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
-
-export const useExpenses = create((set) => ({
-  expenses: [],
-
-  addExpense: (expense) =>
-    set((state) => ({
-      expenses: [expense, ...state.expenses]
-    })),
-
-  // ✅ REALTIME LISTENER
-  startListening: () => {
-    const unsubscribe = onSnapshot(
-      collection(db, "expenses"),
-      (snapshot) => {
-        const data = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-
-        set({ expenses: data });
-      }
-    );
-
-    return unsubscribe;
-  }
-}));
+// store.js — Zustand store removed.
+// All data fetching is handled directly in each screen
+// using Firebase onAuthStateChanged + onSnapshot listeners.
+// This keeps the code simple and beginner-friendly.
