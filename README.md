@@ -1,7 +1,3 @@
-Ahh got it — the issue was those extra IDs and nested code blocks breaking copy. Here’s a clean, perfectly copy-pasteable README.md (no weird tags, no breaks):
-
-⸻
-
 # 🚀 OrbytOS
 This is an [Expo](https://expo.dev) project with a full-stack setup including a backend deployed using a **CI/CD pipeline (Jenkins + Docker + AWS EC2)**.
 ---
