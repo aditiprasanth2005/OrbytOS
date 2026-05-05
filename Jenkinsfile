@@ -16,7 +16,12 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE:latest .'
+                sh '''
+                docker buildx build \
+                    --platform linux/amd64 \
+                    -t aditiprasanth/orbytos-backend:latest \
+                    --push .
+                '''
             }
         }
 
@@ -38,20 +43,13 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent(['ec2-ssh-key']) {
-                    sh """
-                    ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} << EOF
-                    
-                    docker stop backend || true
-                    docker rm backend || true
-
-                    docker stop orbytos || true
-                    docker rm orbytos || true
-
-                    docker pull --platform linux/amd64 aditiprasanth/orbytos-backend:latest
-
-                    docker run -d -p 8080:3000 --name backend aditiprasanth/orbytos-backend:latest
-                    EOF
-                    """
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no ubuntu@100.30.204.247 \
+                    "docker stop backend || true && \
+                     docker rm backend || true && \
+                     docker pull aditiprasanth/orbytos-backend:latest && \
+                     docker run -d -p 8080:3000 --name backend aditiprasanth/orbytos-backend:latest"
+                    '''
                 }
             }
         }
