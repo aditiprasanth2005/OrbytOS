@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "aditiprasanth/orbytos-backend"
-        EC2_HOST = "52.90.204.179"
+        EC2_HOST = "100.30.204.247"   // ✅ FIXED IP
     }
 
     stages {
@@ -39,11 +39,11 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << EOF
+                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
                     docker pull aditiprasanth/orbytos-backend:latest
                     docker stop orbytos || true
                     docker rm orbytos || true
-                    docker run -d -p 3000:3000 --name orbytos aditiprasanth/orbytos-backend:latest
+                    docker run -d -p 8080:3000 --name orbytos aditiprasanth/orbytos-backend:latest
                     EOF
                     '''
                 }
@@ -52,7 +52,7 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh 'curl http://52.90.204.179:3000/health'
+                sh 'curl http://100.30.204.247:8080/health'
             }
         }
     }
