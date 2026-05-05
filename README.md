@@ -24,7 +24,7 @@ npm install
 
 ⸻
 
-**2. Start the Expo app**
+2. Start the Expo app
 
 npx expo start
 
@@ -39,7 +39,7 @@ You can start developing by editing files inside the app directory.
 
 ⸻
 
-**3. Run backend locally**
+3. Run backend locally
 
 cd backend
 npm install
@@ -47,7 +47,7 @@ node server.js
 
 ⸻
 
-**🌐 Live Backend**
+🌐 Live Backend
 
 http://100.30.204.247:8080/health
 
@@ -61,11 +61,11 @@ Example response:
 
 ⸻
 
-**⚙️ CI/CD Pipeline**
+⚙️ CI/CD Pipeline
 
 This project uses Jenkins to automate deployment.
 
-**🔁 Pipeline Stages**
+🔁 Pipeline Stages
 
 1. Checkout code from GitHub
 2. Build Docker image
@@ -76,7 +76,7 @@ This project uses Jenkins to automate deployment.
 
 ⸻
 
-**🐳 Docker**
+🐳 Docker
 
 Build image
 
@@ -88,7 +88,7 @@ docker run -d -p 8080:3000 orbytos-backend
 
 ⸻
 
-**☁️ Deployment**
+☁️ Deployment
 
 * Cloud Provider: AWS EC2
 * Container Runtime: Docker
@@ -96,7 +96,7 @@ docker run -d -p 8080:3000 orbytos-backend
 
 ⸻
 
-**📸 Screenshots (for report)**
+📸 Screenshots (for report)
 
 * Jenkins pipeline success 
 * Docker build & push logs
@@ -106,7 +106,7 @@ docker run -d -p 8080:3000 orbytos-backend
 
 ⸻
 
-**🛠 Tech Stack**
+🛠 Tech Stack
 
 * React Native (Expo)
 * Node.js
@@ -116,7 +116,7 @@ docker run -d -p 8080:3000 orbytos-backend
 
 ⸻
 
-**📌 Future Improvements**
+📌 Future Improvements
 
 * Add authentication (Firebase)
 * Improve UI/UX
@@ -125,26 +125,26 @@ docker run -d -p 8080:3000 orbytos-backend
 
 ⸻
 
-**👩‍💻 Author**
+👩‍💻 Author
 
 Aditi Prasanth
 
 ⸻
 
-**⭐ Acknowledgement**
+⭐ Acknowledgement
 
 This project demonstrates a real-world DevOps workflow integrating development and deployment pipelines.
 
 ⸻
 
-**Learn more**
+Learn more
 
 * https://docs.expo.dev/
 * https://docs.expo.dev/tutorial/introduction/
 
 ⸻
 
-**Join the community**
+Join the community
 
 * https://github.com/expo/expo
 * https://chat.expo.dev
