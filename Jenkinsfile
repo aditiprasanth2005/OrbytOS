@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "aditiprasanth/orbytos"
+        DOCKER_IMAGE = "aditiprasanth/orbytos-backend"
         EC2_HOST = "52.90.204.179"
     }
 
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t $DOCKER_IMAGE:latest .'
             }
         }
 
@@ -29,8 +29,7 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag $DOCKER_IMAGE $DOCKER_USER/orbytos:latest
-                    docker push $DOCKER_USER/orbytos:latest
+                    docker push $DOCKER_IMAGE:latest
                     '''
                 }
             }
@@ -40,11 +39,11 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
-                    docker pull aditiprasanth/orbytos:latest
+                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << EOF
+                    docker pull aditiprasanth/orbytos-backend:latest
                     docker stop orbytos || true
                     docker rm orbytos || true
-                    docker run -d -p 3000:3000 --name orbytos aditiprasanth/orbytos:latest
+                    docker run -d -p 3000:3000 --name orbytos aditiprasanth/orbytos-backend:latest
                     EOF
                     '''
                 }
