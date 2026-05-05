@@ -39,8 +39,8 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST "
-                    
+                    ssh -o StrictHostKeyChecking=no ubuntu@$EC2_HOST << 'EOF'
+
                     docker stop backend || true
                     docker rm backend || true
 
@@ -50,8 +50,8 @@ pipeline {
                     docker pull aditiprasanth/orbytos-backend:latest
 
                     docker run -d -p 8080:3000 --name backend aditiprasanth/orbytos-backend:latest
-            
-                    ""
+
+                    EOF
                     '''
                 }
             }
